@@ -26,7 +26,7 @@
         <button class="tablinks" disabled="true" onclick="openSection(event, 'History')">History</button>
     </div>
     <div id="Details" class="tabcontent">
-        <s:form action="addDataAction" method="POST" enctype="multipart/form-data">
+        <s:form action="updateDataAction" method="POST" enctype="multipart/form-data">
             <s:select list="offices" name="chosenOffice"
                       label="Office" headerKey="None" headerValue=" --Select-- " />
             <s:select list="vehicleTypes" name="chosenVehicleType"

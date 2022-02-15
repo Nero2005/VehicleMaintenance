@@ -17,6 +17,22 @@ public class VehicleDAO {
     String driver, String faultType, String complaint, String status, String client,
     Integer mileage, String location, String filePath) {
         Vehicle vehicle = new Vehicle();
+        createVehicleObject(office, vehicleType, vehicleName, driver, faultType, complaint,
+                status, client, mileage, location, filePath, vehicle);
+
+        SessionFactory sf = HibernateUtil.getSessionFactory();
+        Session session = sf.openSession();
+        session.beginTransaction();
+
+        int id = (Integer) session.save(vehicle);
+        session.getTransaction().commit();
+        session.close();
+        return id;
+    }
+
+    private static void createVehicleObject(String office, String vehicleType, String vehicleName,
+    String driver, String faultType, String complaint, String status, String client,
+    Integer mileage, String location, String filePath, Vehicle vehicle) {
         vehicle.setOffice(office);
         vehicle.setVehicleType(vehicleType);
         vehicle.setVehicleName(vehicleName);
@@ -28,15 +44,6 @@ public class VehicleDAO {
         vehicle.setMileage(mileage);
         vehicle.setLocation(location);
         vehicle.setFilePath(filePath);
-
-        SessionFactory sf = HibernateUtil.getSessionFactory();
-        Session session = sf.openSession();
-        session.beginTransaction();
-
-        int id = (Integer) session.save(vehicle);
-        session.getTransaction().commit();
-        session.close();
-        return id;
     }
 
     /**
@@ -73,40 +80,20 @@ public class VehicleDAO {
     /**
      * This method updates a specific Vehicle object
      */
-//    public static void updateVehicle(int id, String office, String vehicleType, String vehicleName,
-//    String driver, String faultType, String complaint, String status, String client,
-//    Integer mileage, String location) {
-//        Session session = HibernateUtil.getSessionFactory().openSession();
-//        session.beginTransaction();
-//
-//        Vehicle vehicle = (Vehicle) session.get(Vehicle.class, id);
-//        vehicle.setOffice(office);
-//        vehicle.setVehicleType(vehicleType);
-//        vehicle.setVehicleName(vehicleName);
-//        vehicle.setDriver(driver);
-//        vehicle.setFaultType(faultType);
-//        vehicle.setComplaint(complaint);
-//        vehicle.setStatus(status);
-//        vehicle.setClient(client);
-//        vehicle.setMileage(mileage);
-//        vehicle.setLocation(location);
-//        //session.update(student);//No need to update manually as it will be updated automatically on transaction close.
-//        session.getTransaction().commit();
-//        session.close();
-//    }
+    public static void updateVehicle(int id, String office, String vehicleType, String vehicleName,
+    String driver, String faultType, String complaint, String status, String client,
+    Integer mileage, String location, String filePath) {
+        Session session = HibernateUtil.getSessionFactory().openSession();
+        session.beginTransaction();
 
-//    private static void createVehicleObject(String office, String vehicleType, String vehicleName, String driver, String faultType, String complaint, String status, String client, Integer mileage, String location, Vehicle vehicle) {
-//        vehicle.setOffice(office);
-//        vehicle.setVehicleType(vehicleType);
-//        vehicle.setVehicleName(vehicleName);
-//        vehicle.setDriver(driver);
-//        vehicle.setFaultType(faultType);
-//        vehicle.setComplaint(complaint);
-//        vehicle.setStatus(status);
-//        vehicle.setClient(client);
-//        vehicle.setMileage(mileage);
-//        vehicle.setLocation(location);
-//    }
+        Vehicle vehicle = (Vehicle) session.get(Vehicle.class, id);
+        createVehicleObject(office, vehicleType, vehicleName, driver, faultType, complaint,
+                status, client, mileage, location, filePath, vehicle);
+        //session.update(student);//No need to update manually as it will be updated automatically on transaction close.
+        session.getTransaction().commit();
+        session.close();
+    }
+
 
     /**
      * This method deletes a specific Vehicle object
