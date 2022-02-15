@@ -57,6 +57,20 @@ public class VehicleDAO {
     }
 
     /**
+     * This method returns a specific Vehicle object
+     */
+    public static Vehicle getVehicleById(int id) {
+        Session session = HibernateUtil.getSessionFactory().openSession();
+        session.beginTransaction();
+
+        Vehicle vehicle = (Vehicle) session.get(Vehicle.class, id);
+
+        session.getTransaction().commit();
+        session.close();
+        return vehicle;
+    }
+
+    /**
      * This method updates a specific Vehicle object
      */
 //    public static void updateVehicle(int id, String office, String vehicleType, String vehicleName,

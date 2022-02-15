@@ -28,6 +28,16 @@
             <result name="input">/addVehicleRequest.jsp</result>
         </action>
 
+        <action name="viewAction" class="org.example.action.ViewAction">
+            <result name="success">/viewVehicleRequest.jsp</result>
+            <result name="input">/listVehicleRequest.jsp</result>
+        </action>
+
+        <action name="updateAction" class="org.example.action.UpdateAction">
+            <result name="success">/updateVehicleRequest.jsp</result>
+            <result name="input">/listVehicleRequest.jsp</result>
+        </action>
+
     </package>
 
 </struts>

@@ -55,10 +55,6 @@
         </div>
         <div id="Files" class="tabcontent">
             <h3>Files</h3>
-<%--            <s:form action="fileDataAction" method="POST" enctype="multipart/form-data">--%>
-<%--                <s:file name="uploadedFile" label="File" />--%>
-<%--                <s:submit value="Submit File" />--%>
-<%--            </s:form>--%>
         </div>
 
     </div>

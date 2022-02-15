@@ -34,17 +34,19 @@
                 <td><s:property value="#vehicle.id" /> </td>
                 <td></td>
                 <td></td>
-                <td rowspan="2"><s:property value="#vehicle.vehicleName" /><br />
+                <td><s:property value="#vehicle.vehicleName" /><br />
                     <s:property value="#vehicle.mileage" />
                 </td>
                 <td></td>
-                <td rowspan="2"><s:property value="#vehicle.office" /><br />
+                <td><s:property value="#vehicle.office" /><br />
                         <s:property value="#vehicle.client" />
                 </td>
                 <td><s:property value="#vehicle.complaint" /> </td>
                 <td><s:property value="#vehicle.status" /> </td>
-                <td>View</td>
-                <td>Edit</td>
+                <td><a href="viewAction?id=<s:property value="#vehicle.id" />">
+                    View</a></td>
+                <td><a href="updateAction?id=<s:property value="#vehicle.id" />">
+                    Edit</a></td>
             </tr>
         </s:iterator>
     </table>

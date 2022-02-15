@@ -1,12 +1,13 @@
 package org.example.action;
 
 import com.opensymphony.xwork2.ActionSupport;
-import org.apache.commons.io.FileUtils;
 import org.example.dao.VehicleDAO;
+import org.example.hibernate.model.Vehicle;
 
 import java.io.File;
 
-public class AddDataAction extends ActionSupport {
+public class ViewAction extends ActionSupport {
+    private int id;
     private String chosenOffice;
     private String chosenVehicleType;
     private String chosenVehicleName;
@@ -24,25 +25,29 @@ public class AddDataAction extends ActionSupport {
 
     @Override
     public String execute() throws Exception {
-        System.out.println(chosenOffice);
-        System.out.println(chosenVehicleType);
-        System.out.println(chosenVehicleName);
-        System.out.println(chosenDriver);
-        System.out.println(chosenFaultType);
-        System.out.println(complaint);
-        System.out.println(chosenStatus);
-        System.out.println(chosenClient);
-        System.out.println(mileage);
-        System.out.println(location);
-        System.out.println(uploadedFileFileName);
-        File localFile = new File(localDirectory, uploadedFileFileName);
-        FileUtils.copyFile(uploadedFile, localFile);
-        System.out.println(localFile.getAbsolutePath());
-        String filePath = localFile.getAbsolutePath();
-        int id = VehicleDAO.saveVehicle(chosenOffice, chosenVehicleType, chosenVehicleName, chosenDriver,
-        chosenFaultType, complaint, chosenStatus, chosenClient, mileage, location, filePath);
-        System.out.println(id);
+        Vehicle vehicle = VehicleDAO.getVehicleById(id);
+        chosenOffice = vehicle.getOffice();
+        chosenVehicleType = vehicle.getVehicleType();
+        chosenVehicleName = vehicle.getVehicleName();
+        chosenDriver = vehicle.getDriver();
+        chosenFaultType = vehicle.getFaultType();
+        complaint = vehicle.getComplaint();
+        chosenStatus = vehicle.getStatus();
+        chosenClient = vehicle.getClient();
+        mileage = vehicle.getMileage();
+        location = vehicle.getLocation();
+        uploadedFile = new File(vehicle.getFilePath());
+        uploadedFileFileName = uploadedFile.getName();
+        System.out.println(vehicle.getDriver());
         return SUCCESS;
+    }
+
+    public int getId() {
+        return id;
+    }
+
+    public void setId(int id) {
+        this.id = id;
     }
 
     public String getChosenOffice() {
@@ -85,6 +90,14 @@ public class AddDataAction extends ActionSupport {
         this.chosenFaultType = chosenFaultType;
     }
 
+    public String getComplaint() {
+        return complaint;
+    }
+
+    public void setComplaint(String complaint) {
+        this.complaint = complaint;
+    }
+
     public String getChosenStatus() {
         return chosenStatus;
     }
@@ -99,14 +112,6 @@ public class AddDataAction extends ActionSupport {
 
     public void setChosenClient(String chosenClient) {
         this.chosenClient = chosenClient;
-    }
-
-    public String getComplaint() {
-        return complaint;
-    }
-
-    public void setComplaint(String complaint) {
-        this.complaint = complaint;
     }
 
     public Integer getMileage() {
@@ -147,5 +152,13 @@ public class AddDataAction extends ActionSupport {
 
     public void setUploadedFileFileName(String uploadedFileFileName) {
         this.uploadedFileFileName = uploadedFileFileName;
+    }
+
+    public String getLocalDirectory() {
+        return localDirectory;
+    }
+
+    public void setLocalDirectory(String localDirectory) {
+        this.localDirectory = localDirectory;
     }
 }
