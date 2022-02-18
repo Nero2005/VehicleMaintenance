@@ -13,5 +13,6 @@
         <property name="format_sql">false</property>
 
         <mapping class="org.example.hibernate.model.Vehicle"/>
+        <mapping class="org.example.hibernate.model.History"/>
     </session-factory>
 </hibernate-configuration>

@@ -19,7 +19,7 @@
     <div id="form">
         <%@ include file="header.jsp"%>
         <div id="location">
-            <a href="listAction">LIST OF VEHICLE MAINTENANCE REQUEST</a>
+            <a href="listAction">LIST OF VEHICLE MAINTENANCE REQUESTS</a>
             <span> > </span>
             <a class="currentPage" href="#" aria-disabled="true">NEW VEHICLE MAINTENANCE REQUEST</a>
         </div>

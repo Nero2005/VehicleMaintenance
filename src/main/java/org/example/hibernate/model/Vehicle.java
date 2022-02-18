@@ -16,6 +16,9 @@ public class Vehicle implements Serializable {
     @Column(name = "id", nullable = false)
     private int id;
 
+    @Column(name = "date_time", nullable = false)
+    private String dateTime;
+
     @Column(name = "OFFICE", nullable = false)
     private String office;
 
@@ -55,6 +58,14 @@ public class Vehicle implements Serializable {
 
     public void setId(int id) {
         this.id = id;
+    }
+
+    public String getDateTime() {
+        return dateTime;
+    }
+
+    public void setDateTime(String dateTime) {
+        this.dateTime = dateTime;
     }
 
     public String getOffice() {

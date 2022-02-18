@@ -16,17 +16,18 @@
 <div id="form">
     <%@ include file="header.jsp"%>
     <div id="location">
-        <a href="listAction">LIST OF VEHICLE MAINTENANCE REQUEST</a>
+        <a href="listAction">LIST OF VEHICLE MAINTENANCE REQUESTS</a>
         <span> > </span>
-        <a class="currentPage" href="#" aria-disabled="true">NEW VEHICLE MAINTENANCE REQUEST</a>
+        <a class="currentPage" href="#" aria-disabled="true">UPDATE VEHICLE MAINTENANCE REQUEST</a>
     </div>
     <div class="tab">
         <button class="tablinks" onclick="openSection(event, 'Details')">DETAILS</button>
-        <button class="tablinks" onclick="openSection(event, 'Files')">FILES</button>
+        <button class="tablinks" onclick="openSection(event, 'History')">HISTORY</button>
         <button class="tablinks" disabled="true" onclick="openSection(event, 'History')">History</button>
     </div>
     <div id="Details" class="tabcontent">
         <s:form action="updateDataAction" method="POST" enctype="multipart/form-data">
+            <s:textfield name="id" label="Id" readonly="true" />
             <s:select list="offices" name="chosenOffice"
                       label="Office" headerKey="None" headerValue=" --Select-- " />
             <s:select list="vehicleTypes" name="chosenVehicleType"
@@ -50,10 +51,29 @@
             <s:submit value="Submit" />
         </s:form>
     </div>
-    <div id="Files" class="tabcontent">
-        <h3>Files</h3>
+    <div id="History" class="tabcontent">
+        <h3>History</h3>
+        <table class="vehicleTable" align="center">
+            <thead>
+            <tr>
+                <th>Time</th>
+                <th>User</th>
+                <th>Action</th>
+                <th colspan="4">Detail</th>
+            </tr>
+            </thead>
+            <s:iterator value="historyList" var="history">
+                <tr>
+                    <td><s:property value="#history.dateTime" /> </td>
+                    <td><s:property value="#history.user" /></td>
+                    <td><s:property value="#history.action" /></td>
+                    <td><s:property value="#history.detail" /></td>
+                </tr>
+            </s:iterator>
+        </table>
     </div>
 
 </div>
 </body>
+<script src="js/script.js" type="text/javascript"></script>
 </html>

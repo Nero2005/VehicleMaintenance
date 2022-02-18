@@ -5,8 +5,11 @@ import org.apache.commons.io.FileUtils;
 import org.example.dao.VehicleDAO;
 
 import java.io.File;
+import java.text.SimpleDateFormat;
+import java.util.Date;
 
 public class AddDataAction extends ActionSupport {
+    private String dateTime;
     private String chosenOffice;
     private String chosenVehicleType;
     private String chosenVehicleName;
@@ -39,10 +42,26 @@ public class AddDataAction extends ActionSupport {
         FileUtils.copyFile(uploadedFile, localFile);
         System.out.println(localFile.getAbsolutePath());
         String filePath = localFile.getAbsolutePath();
-        int id = VehicleDAO.saveVehicle(chosenOffice, chosenVehicleType, chosenVehicleName, chosenDriver,
+        Date date = new Date();
+        SimpleDateFormat sdf = new SimpleDateFormat("dd-MMM-yyyy");
+        SimpleDateFormat sdf2 = new SimpleDateFormat("HH:mm");
+
+        String createdDate = sdf.format(date);
+        String createdTime = sdf2.format(date);
+        System.out.println(createdDate+" "+createdTime);
+        dateTime = createdDate+" "+createdTime;
+        int id = VehicleDAO.saveVehicle(dateTime, chosenOffice, chosenVehicleType, chosenVehicleName, chosenDriver,
         chosenFaultType, complaint, chosenStatus, chosenClient, mileage, location, filePath);
         System.out.println(id);
         return SUCCESS;
+    }
+
+    public String getDateTime() {
+        return dateTime;
+    }
+
+    public void setDateTime(String dateTime) {
+        this.dateTime = dateTime;
     }
 
     public String getChosenOffice() {

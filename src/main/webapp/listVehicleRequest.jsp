@@ -13,7 +13,10 @@
     <link rel="stylesheet" href="styles/style.css">
 </head>
 <body>
-    <h1>List</h1>
+    <%@ include file="header.jsp"%>
+    <div id="location">
+        <a class="currentPage" href="#" aria-disabled="true">LIST OF VEHICLE MAINTENANCE REQUESTS</a>
+    </div>
     <table class="vehicleTable" align="center">
         <thead>
         <tr>
@@ -32,7 +35,7 @@
         <s:iterator value="vehicles" var="vehicle">
             <tr>
                 <td><s:property value="#vehicle.id" /> </td>
-                <td></td>
+                <td><s:property value="#vehicle.dateTime" /> </td>
                 <td></td>
                 <td><s:property value="#vehicle.vehicleName" /><br />
                     <s:property value="#vehicle.mileage" />

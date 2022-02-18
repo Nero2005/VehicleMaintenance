@@ -1,7 +1,9 @@
 package org.example.action;
 
 import com.opensymphony.xwork2.ActionSupport;
+import org.example.dao.HistoryDAO;
 import org.example.dao.VehicleDAO;
+import org.example.hibernate.model.History;
 import org.example.hibernate.model.Vehicle;
 
 import java.io.File;
@@ -24,6 +26,7 @@ public class UpdateAction extends ActionSupport {
     private String uploadedFileContentType;
     private String uploadedFileFileName;
     private String localDirectory = "C:\\temp";
+    private List<History> historyList;
     private List<String> offices = new ArrayList<>();
     private List<String> vehicleTypes = new ArrayList<>();
     private List<String> vehicles = new ArrayList<>();
@@ -99,6 +102,7 @@ public class UpdateAction extends ActionSupport {
         initializeFaultTypes();
         initializeStatuses();
         initializeClients();
+        historyList = HistoryDAO.getAllHistory();
         System.out.println("Testing...");
         System.out.println("Testing... again");
         System.out.println(!vehicles.isEmpty());
@@ -107,6 +111,7 @@ public class UpdateAction extends ActionSupport {
     @Override
     public String execute() throws Exception {
         Vehicle vehicle = VehicleDAO.getVehicleById(id);
+        id = vehicle.getId();
         chosenOffice = vehicle.getOffice();
         chosenVehicleType = vehicle.getVehicleType();
         chosenVehicleName = vehicle.getVehicleName();
@@ -242,6 +247,14 @@ public class UpdateAction extends ActionSupport {
 
     public void setLocalDirectory(String localDirectory) {
         this.localDirectory = localDirectory;
+    }
+
+    public List<History> getHistoryList() {
+        return historyList;
+    }
+
+    public void setHistoryList(List<History> historyList) {
+        this.historyList = historyList;
     }
 
     public List<String> getOffices() {

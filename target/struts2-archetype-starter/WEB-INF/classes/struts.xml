@@ -38,6 +38,11 @@
             <result name="input">/listVehicleRequest.jsp</result>
         </action>
 
+        <action name="updateDataAction" class="org.example.action.UpdateDataAction">
+            <result name="success" type="redirect">listAction</result>
+            <result name="input">/listVehicleRequest.jsp</result>
+        </action>
+
     </package>
 
 </struts>

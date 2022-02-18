@@ -5,9 +5,12 @@ import org.apache.commons.io.FileUtils;
 import org.example.dao.VehicleDAO;
 
 import java.io.File;
+import java.text.SimpleDateFormat;
+import java.util.Date;
 
 public class UpdateDataAction extends ActionSupport {
     private int id;
+    private String dateTime;
     private String chosenOffice;
     private String chosenVehicleType;
     private String chosenVehicleName;
@@ -25,10 +28,29 @@ public class UpdateDataAction extends ActionSupport {
 
     @Override
     public String execute() throws Exception {
+        System.out.println(chosenOffice);
+        System.out.println(chosenVehicleType);
+        System.out.println(chosenVehicleName);
+        System.out.println(chosenDriver);
+        System.out.println(chosenFaultType);
+        System.out.println(complaint);
+        System.out.println(chosenStatus);
+        System.out.println(chosenClient);
+        System.out.println(mileage);
+        System.out.println(location);
+        System.out.println(uploadedFileFileName);
         File localFile = new File(localDirectory, uploadedFileFileName);
         FileUtils.copyFile(uploadedFile, localFile);
         String filePath = localFile.getAbsolutePath();
-        VehicleDAO.updateVehicle(id, chosenOffice, chosenVehicleType, chosenVehicleName, chosenDriver,
+        Date date = new Date();
+        SimpleDateFormat sdf = new SimpleDateFormat("dd-MMM-yyyy");
+        SimpleDateFormat sdf2 = new SimpleDateFormat("HH:mm");
+
+        String createdDate = sdf.format(date);
+        String createdTime = sdf2.format(date);
+
+        dateTime = createdDate+" "+createdTime;
+        VehicleDAO.updateVehicle(id, dateTime, chosenOffice, chosenVehicleType, chosenVehicleName, chosenDriver,
                 chosenFaultType, complaint, chosenStatus, chosenClient, mileage, location, filePath);
         return SUCCESS;
     }
@@ -39,6 +61,14 @@ public class UpdateDataAction extends ActionSupport {
 
     public void setId(int id) {
         this.id = id;
+    }
+
+    public String getDateTime() {
+        return dateTime;
+    }
+
+    public void setDateTime(String dateTime) {
+        this.dateTime = dateTime;
     }
 
     public String getChosenOffice() {
